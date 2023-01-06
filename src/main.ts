@@ -18,10 +18,10 @@ const run = async (): Promise<void> => {
 
   const {
     data: { codespaces, total_count },
-  } = await octokit.request(
+  } = (await octokit.request(
     "GET /user/codespaces",
     listCodespacesForAuthenticatedUserParams
-  );
+  )) as any;
 
   core.debug(
     `total number of codespaces for the authenticated user: ${total_count}`
@@ -47,10 +47,10 @@ const run = async (): Promise<void> => {
       const deleteCodespaceParams: deleteCodespacesParams = {
         codespace_name: codespace.name,
       };
-      const { status } = await octokit.request(
+      const { status } = (await octokit.request(
         "DELETE /user/codespaces/{codespace_name}",
         deleteCodespaceParams
-      );
+      )) as any;
       arr.push(status);
     });
   }
