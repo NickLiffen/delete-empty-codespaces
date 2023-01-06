@@ -1,13 +1,13 @@
-name: 'Action Name'
+name: 'Delete Empty Codespaces'
 author: 'NickLiffen'
-description: 'Action Description'
+description: 'An action which deletes codespaces for an authenticated user where there are no uncommitted changes.'
 inputs:
-  inputName:
-    description: 'Input Description'
-    required: true
+  GITHUB_TOKEN:
+    description: 'A GitHub token with the codespaces scope'
+    required: false
 outputs:
-  outputName:
-    description: 'Output Description'
+  success:
+    description: 'true|false based on if the script worked'
 runs:
   using: 'node16'
   main: 'dist/index.js'
