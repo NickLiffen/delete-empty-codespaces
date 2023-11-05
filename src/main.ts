@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import { Octokit } from "@octokit/action";
 import { Endpoints } from "@octokit/types";
 import * as core from "@actions/core";
@@ -20,11 +22,11 @@ const run = async (): Promise<void> => {
     data: { codespaces, total_count },
   } = (await octokit.request(
     "GET /user/codespaces",
-    listCodespacesForAuthenticatedUserParams
+    listCodespacesForAuthenticatedUserParams,
   )) as any;
 
   core.debug(
-    `total number of codespaces for the authenticated user: ${total_count}`
+    `total number of codespaces for the authenticated user: ${total_count}`,
   );
 
   core.debug(`Codespaces found: ${JSON.stringify(codespaces)}`);
@@ -40,7 +42,7 @@ const run = async (): Promise<void> => {
     });
 
     core.debug(
-      `total count after removing the codespaces with unpublished and uncomitted changes: ${filterd.length}`
+      `total count after removing the codespaces with unpublished and uncomitted changes: ${filterd.length}`,
     );
 
     filterd.forEach(async (codespace: any) => {
@@ -49,7 +51,7 @@ const run = async (): Promise<void> => {
       };
       const { status } = (await octokit.request(
         "DELETE /user/codespaces/{codespace_name}",
-        deleteCodespaceParams
+        deleteCodespaceParams,
       )) as any;
       arr.push(status);
     });

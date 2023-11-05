@@ -9,7 +9,7 @@ outputs:
   success:
     description: 'true|false based on if the script worked'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
 branding:
   icon: 'target'  
